@@ -1,4 +1,5 @@
 //angularjs.org home page
+var downloadAngularJSOnePage = require('./downloadAngularJSOnePage.js');
 
 var HomePage = function(){
     this.downLoadAngularJSOneButton = element(by.css('.btn.btn-large.btn-primary.download-btn'));
@@ -9,7 +10,7 @@ var HomePage = function(){
 
     this.clickDownloadAngularJSOnePage = function(){
         this.downLoadAngularJSOneButton.click();
-        return require('./downloadAngularJSOnePage.js');
+        return downloadAngularJSOnePage;
     }
 };
 

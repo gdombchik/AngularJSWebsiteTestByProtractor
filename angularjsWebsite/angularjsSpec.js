@@ -19,9 +19,21 @@ describe('Test AngularJS Website',function(){
         //check the properties of the DownloadAngularJSOnePage
         expect(downloadAngularJSOnePage.titleLabel.getText()).toBe('Download AngularJS');
         expect(downloadAngularJSOnePage.branch.getText()).toBe('1.5.x (stable)');
+        expect(downloadAngularJSOnePage.buildMinified.getText()).toBe('Minified');
+        expect(downloadAngularJSOnePage.buildUncompressed.getText()).toBe('Uncompressed');
+        expect(downloadAngularJSOnePage.buildZip.getText()).toBe('Zip');
+        expect(downloadAngularJSOnePage.cdn.getAttribute('value')).toContain('angular.min.js');
 
+        //which build button has been selected
+        expect(downloadAngularJSOnePage.buildMinified.getAttribute('class')).toContain('active'); //selected
+        expect(downloadAngularJSOnePage.buildUncompressed.getAttribute('class')).not.toContain('active'); //not selected
+        expect(downloadAngularJSOnePage.buildZip.getAttribute('class')).not.toContain('active'); //not selected
 
-        console.log('in the jasmine it');
+        expect(downloadAngularJSOnePage.getBower()).toContain('bower');
+        expect(downloadAngularJSOnePage.getNpm()).toContain('npm');
+        expect(downloadAngularJSOnePage.extras.getText()).toEqual('Browse additional modules');
+        expect(downloadAngularJSOnePage.previousVersions.getText()).toEqual('Previous Versions');
+        expect(downloadAngularJSOnePage.getDownloadButton()).toContain('angular.min.js');
     });
 });
 

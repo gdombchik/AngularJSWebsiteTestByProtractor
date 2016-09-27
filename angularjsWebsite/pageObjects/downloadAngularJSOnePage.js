@@ -1,23 +1,41 @@
+//return ElementFinder of the properties of the DownloadAngularJSOnePage function constructor
 var DownloadAngularJSOnePage = function(){
     this.titleLabel = element(by.id('downloadLabel'));
-
     //branch
     this.branch = element(by.buttonText('1.5.x (stable)'));
     //build
-    this.build;
+    this.buildMinified = element(by.buttonText('Minified'));
+    this.buildZip = element(by.partialButtonText('Zip'));                   //button text has extra spaces
+    this.buildUncompressed = element(by.partialButtonText('Uncompressed')); //button text has extra spaces
     //cdn
-    this.cdn;
+    this.cdn = element(by.id('cdnURL'));
     //bower
-    this.bower;
+    this.getBower = function(){
+        return getInputBoxByAttributeValue('bower');
+    };
     //npm
-    this.npm;
+    this.getNpm = function(){
+        return getInputBoxByAttributeValue('npm');
+    };
     //extras
-    this.extras;
+    //this.extras = browser.findElement(by.xpath('//dd/span/a')).getText();
+    this.extras = element(by.linkText('Browse additional modules'));
     //previous versions
-    this.previousVersions;
+    this.previousVersions = element(by.linkText('Previous Versions'));
     //download button
-    this.downloadButton;
-
+    this.getDownloadButton = function(){
+        return getDownloadBoxByAttributeHref('angular.min.js');
+    };
 }
+
+//private functions
+getInputBoxByAttributeValue = function(value){
+    return element.all(by.tagName('input')).filter(function(elem, index) { return elem.getAttribute('value').then(function(text) { return text.indexOf(value) != -1; }); }).first().getAttribute('value');
+};
+getDownloadBoxByAttributeHref = function(value){
+    return element.all(by.css('.btn.btn-primary.btn-large')).filter(function(elem, index) { return elem.getAttribute('href').then(function(text) { return text.indexOf('angular.min.js') != -1; }); }).first().getAttribute('href');
+}
+
+
 
 module.exports = new DownloadAngularJSOnePage;
