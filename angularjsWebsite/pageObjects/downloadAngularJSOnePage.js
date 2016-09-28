@@ -26,15 +26,22 @@ var DownloadAngularJSOnePage = function(){
     this.getDownloadButton = function(){
         return getDownloadBoxByAttributeHref('angular.min.js');
     };
+    //close button
+    this.getCloseButton = function(){
+        return getCloseButton();
+    };
 }
 
-//private functions
+//private functions - protractor throws errors if I try to assign these functions directly to the property value
 getInputBoxByAttributeValue = function(value){
     return element.all(by.tagName('input')).filter(function(elem, index) { return elem.getAttribute('value').then(function(text) { return text.indexOf(value) != -1; }); }).first().getAttribute('value');
 };
 getDownloadBoxByAttributeHref = function(value){
     return element.all(by.css('.btn.btn-primary.btn-large')).filter(function(elem, index) { return elem.getAttribute('href').then(function(text) { return text.indexOf('angular.min.js') != -1; }); }).first().getAttribute('href');
-}
+};
+getCloseButton = function(){
+    return element.all(by.tagName('button')).filter(function(elem, index) { return elem.getAttribute('class').then(function(text) { return text.indexOf('close') != -1; }); }).first().getAttribute('value');
+};
 
 
 

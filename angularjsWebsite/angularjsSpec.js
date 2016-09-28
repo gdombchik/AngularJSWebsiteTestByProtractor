@@ -5,6 +5,7 @@ describe('Test AngularJS Website',function(){
 
     var homePage = require('./pageObjects/homePage.js');
     var downloadAngularJSOnePage = require('./pageObjects/downloadAngularJSOnePage.js');
+    var theBasics = require('./pageObjects/theBasics.js');
 
     it('Test basic components on the AngularJS home page',function(){
         //different jasmine matchers(toMatch,toBe,toEqual,toContain)
@@ -34,6 +35,21 @@ describe('Test AngularJS Website',function(){
         expect(downloadAngularJSOnePage.extras.getText()).toEqual('Browse additional modules');
         expect(downloadAngularJSOnePage.previousVersions.getText()).toEqual('Previous Versions');
         expect(downloadAngularJSOnePage.getDownloadButton()).toContain('angular.min.js');
+
+        //Close Button
+        var closeButton = downloadAngularJSOnePage.getCloseButton();
+        expect(closeButton.getText()).toBe('×');
+        closeButton.click();
+
+        expect(homePage.tryTheNewAngularTwoButton.getText()).toBe('Design Docs & Notes');
+
+        //browser.sleep(5 * 1000, 'Server should start within 5 seconds');
+    });
+
+    it('Test The Basics',function(){
+        theBasics = homePage.theBasics();
+        theBasics.setName("Greg");
+        expect(theBasics.getName()).toBe('Hello Greg!');
     });
 });
 
