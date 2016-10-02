@@ -6,6 +6,7 @@ describe('Test AngularJS Website',function(){
     var homePage = require('./pageObjects/homePage.js');
     var downloadAngularJSOnePage = require('./pageObjects/downloadAngularJSOnePage.js');
     var theBasics = require('./pageObjects/theBasics.js');
+    var addSomeControl = require('./pageObjects/addSomeControl.js');
 
     it('Test basic components on the AngularJS home page',function(){
         //different jasmine matchers(toMatch,toBe,toEqual,toContain)
@@ -47,9 +48,39 @@ describe('Test AngularJS Website',function(){
     });
 
     it('Test The Basics',function(){
-        theBasics = homePage.theBasics();
+        theBasics = homePage.getTheBasics();
         theBasics.setName("Greg");
         expect(theBasics.getName()).toBe('Hello Greg!');
+    });
+
+    xit('Test Add Some Control',function(){
+        addSomeControl = homePage.getAddSomeControl();
+
+        //initial todo count
+        expect(addSomeControl.todoList.count()).toBe(2);
+
+        //todo values
+        //var values = ['learn angular','build an angular app'];
+        //var values = [ { text: 'learn angular' }, { text: 'build an angular app' } ];
+        var values = 'learn angular build an angular app';
+        expect(values).toEqual(addSomeControl.getToListAllValues());
+        //expect(JSON.stringify(values)==JSON.stringify(addSomeControl.getToListAllValues())).toBe(true);
+        //var list = element.all(by.repeater('todo in todoList.todos')).map(function(elm, index) { return { text: elm.getText() }; });
+        //expect(values).toEqual(list);
+
+        //console.log(addSomeControl.getToListAllValues().getText());
+
+        //todos checkbox selected
+
+
+        //todos checkbox not selected
+
+        //add new todo
+
+        //todo count
+
+        //todo values
+
     });
 });
 

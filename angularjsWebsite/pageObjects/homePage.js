@@ -1,6 +1,7 @@
 //angularjs.org home page
 var downloadAngularJSOnePage = require('./downloadAngularJSOnePage.js');
 var theBasics = require('./theBasics.js');
+var addSomeControl = require('./addSomeControl.js');
 
 var HomePage = function(){
     //Download AngularJS 1
@@ -19,10 +20,13 @@ var HomePage = function(){
         return downloadAngularJSOnePage;
     }
     //The Basics page object
-    this.theBasics = function(){
+    this.getTheBasics = function(){
         return theBasics;
     }
-
+    //The Add Some Control page object
+    this.getAddSomeControl = function(){
+        return addSomeControl;
+    }
 };
 
 module.exports = new HomePage();
