@@ -59,8 +59,10 @@ describe('Test AngularJS Website',function(){
         //initial todo count
         expect(addSomeControl.todoList.count()).toBe(2);
 
-        //current todo values
+        //the initial todo values
         var values = ['learn angular','build an angular app'];
+
+        //current todo values
         addSomeControl.todoList.each(function (element, index) {
             element.getText().then(function (text) {
                 expect(values[index]).toBe(text);
@@ -84,17 +86,51 @@ describe('Test AngularJS Website',function(){
         //------not currently being used (above)----
 
         //todos checkbox selected
-        
+        addSomeControl.todoListChecked.each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(values[0]).toBe(text); //learn angular
+            });
+        });
 
         //todos checkbox not selected
+        addSomeControl.todoListNotChecked.each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(values[1]).toBe(text); //build an angular app
+            });
+        });
 
         //add new todo
+        var newTodo = 'Go to the dentist';
+        addSomeControl.addNewTodo(newTodo);
+        addSomeControl.addButton().click(); //click the add button to add the new todo value
+        expect(addSomeControl.todoList.count()).toBe(3);  //todo count has increased to three
+        var newTodoValues = [values[1],newTodo];  //'build an angular app' and 'Go to the dentist'
+        addSomeControl.todoListNotChecked.each(function (element, index) { //recheck the checkbox not selected values
+            element.getText().then(function (text) {
+                expect(newTodoValues[index]).toBe(text); //'build an angular app' and 'Go to the dentist'
+            });
+        });
 
+        addSomeControl.todoList.each(function (element, index) { //recheck the checkbox not selected values
+            element.getText().then(function (text) {
+                if(text == newTodo){
+                    addSomeControl.checkBoxes.get(index).click(); //check the 'Go to the dentist' checkbox
+                }
+            });
+        });
 
-        //todo count
+        addSomeControl.todoListNotChecked.each(function (element, index) { //recheck the checkbox not selected values
+            element.getText().then(function (text) {
+                expect(values[1]).toBe(text); //'build an angular app'
+            });
+        });
 
-
-        //todo values
+        var todoListCheckedValues = [values[0],newTodo];  //'build an angular app' and 'Go to the dentist'
+        addSomeControl.todoListChecked.each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(todoListCheckedValues[index]).toBe(text); //'learn angular' and 'Go to the dentist'
+            });
+        });
 
 
     });
