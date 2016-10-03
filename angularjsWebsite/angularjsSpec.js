@@ -53,33 +53,49 @@ describe('Test AngularJS Website',function(){
         expect(theBasics.getName()).toBe('Hello Greg!');
     });
 
-    xit('Test Add Some Control',function(){
+    it('Test Add Some Control',function(){
         addSomeControl = homePage.getAddSomeControl();
 
         //initial todo count
         expect(addSomeControl.todoList.count()).toBe(2);
 
-        //todo values
-        //var values = ['learn angular','build an angular app'];
-        //var values = [ { text: 'learn angular' }, { text: 'build an angular app' } ];
-        var values = 'learn angular build an angular app';
-        expect(values).toEqual(addSomeControl.getToListAllValues());
-        //expect(JSON.stringify(values)==JSON.stringify(addSomeControl.getToListAllValues())).toBe(true);
-        //var list = element.all(by.repeater('todo in todoList.todos')).map(function(elm, index) { return { text: elm.getText() }; });
-        //expect(values).toEqual(list);
+        //current todo values
+        var values = ['learn angular','build an angular app'];
+        addSomeControl.todoList.each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(values[index]).toBe(text);
+            });
+        });
 
-        //console.log(addSomeControl.getToListAllValues().getText());
+        //------not currently being used (below)----
+        //this works for map
+        /*var values = [ { text: 'learn angular' }, { text: 'build an angular app' } ];
+        addSomeControl.getToListAllValues().then(function(text){
+            expect(values).toEqual(text);
+        });*/
+
+        //this works for reduce
+        /*var values = 'learn angular build an angular app ';
+        addSomeControl.getToListAllValues().then(function(text){
+            expect(values).toEqual(text);
+        });*/
+
+        //expect(JSON.stringify(values)==JSON.stringify(addSomeControl.getToListAllValues())).toBe(true);
+        //------not currently being used (above)----
 
         //todos checkbox selected
-
+        
 
         //todos checkbox not selected
 
         //add new todo
 
+
         //todo count
 
+
         //todo values
+
 
     });
 });
