@@ -103,7 +103,9 @@ describe('Test AngularJS Website',function(){
         var newTodo = 'Go to the dentist';
         addSomeControl.addNewTodo(newTodo);
         addSomeControl.addButton().click(); //click the add button to add the new todo value
+
         expect(addSomeControl.todoList.count()).toBe(3);  //todo count has increased to three
+
         var newTodoValues = [values[1],newTodo];  //'build an angular app' and 'Go to the dentist'
         addSomeControl.todoListNotChecked.each(function (element, index) { //recheck the checkbox not selected values
             element.getText().then(function (text) {

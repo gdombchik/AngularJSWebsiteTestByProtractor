@@ -11,7 +11,8 @@ var AddSomeControl = function () {
 
     this.checkBoxes = element.all(by.css('input[type=checkbox]'));
 
-    this.clickCheckBox = function(value){
+    //does not work
+    /*this.clickCheckBox = function(value){
         this.todoList.each(function (element, index) {
             element.getText().then(function (text) {
                 if(text == value){
@@ -21,7 +22,7 @@ var AddSomeControl = function () {
                 }
             });
         });
-    }
+    }*/
 
     /*this.getToListAllValues = function () {
         var values = [];
