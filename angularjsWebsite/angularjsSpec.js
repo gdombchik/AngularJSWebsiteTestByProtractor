@@ -164,15 +164,36 @@ describe('Test AngularJS Website',function(){
         });
 
         //United States Localization
-        var localesValues = ['Locale: US','Locale: SK'];
-
+        var unitedStatesLocalizationValues = ['Date: Sunday, April 1, 2012','Currency: $123,456.00','Number: 98,765.432'];
+        createComponents.getUnitedStatesLocalization().each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(unitedStatesLocalizationValues[index]).toBe(text);
+            });
+        });
 
         //United States Pluralization
+        var unitedStatesPluralizationValues = ['no beers','1 beer','2 beers','3 beers','4 beers','5 beers','6 beers'];
+        createComponents.getUnitedStatesPluralization().each(function (element, index) {
+            element.getAttribute('innerHTML').then(function (text) {
+                expect(unitedStatesPluralizationValues[index]).toBe(text);
+            });
+        });
 
         //Slovakia Localization
+        var slovakiaLocalizationValues = ['Date: nedeľa, 1. apríla 2012','Currency: 123 456,00 €','Number: 98 765,432'];
+        createComponents.getSlovakiaLocalization().each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(slovakiaLocalizationValues[index]).toBe(text);
+            });
+        });
 
-        //United States Pluralization
-
+        //Slovakia Pluralization
+        var slovakiaPluralizationValues = ['žiadne pivo','1 pivo','2 pivá','3 pivá','4 pivá','5 pív','6 pív'];
+        createComponents.getSlovakiaPluralization().each(function (element, index) {
+            element.getAttribute('innerHTML').then(function (text) {
+                expect(slovakiaPluralizationValues[index]).toBe(text);
+            });
+        });
     });
 });
 
