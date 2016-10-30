@@ -7,6 +7,7 @@ describe('Test AngularJS Website',function(){
     var downloadAngularJSOnePage = require('./pageObjects/downloadAngularJSOnePage.js');
     var theBasics = require('./pageObjects/theBasics.js');
     var addSomeControl = require('./pageObjects/addSomeControl.js');
+    var createComponents = require('./pageObjects/createComponents.js');
 
     it('Test basic components on the AngularJS home page',function(){
         //different jasmine matchers(toMatch,toBe,toEqual,toContain)
@@ -19,6 +20,7 @@ describe('Test AngularJS Website',function(){
         downloadAngularJSOnePage = homePage.clickDownloadAngularJSOnePage();
 
         //check the properties of the DownloadAngularJSOnePage
+        browser.wait(downloadAngularJSOnePage.titleLabel.getText()).isPresent;
         expect(downloadAngularJSOnePage.titleLabel.getText()).toBe('Download AngularJS');
         expect(downloadAngularJSOnePage.branch.getText()).toBe('1.5.x (stable)');
         expect(downloadAngularJSOnePage.buildMinified.getText()).toBe('Minified');
@@ -134,6 +136,42 @@ describe('Test AngularJS Website',function(){
             });
         });
 
+
+    });
+
+    it('Test Wire Up A Backend',function(){
+        /*element.all(by.repeater('project in projectList.projects').column('project.name')).each(function (element, index) {
+            console.log('inside element.all');
+            element.getText().then(function (text) {
+                console.log(text);
+            });
+        });*/
+        //element.all(by.repeater('todo in todoList.todos')).each(function (element, index) {
+        //browser.wait(element.all(by.repeater('project in projectList.projects'))).isPresent;
+
+
+
+
+    });
+
+    it('Test Create Components',function(){
+        //Locales
+        var localesValues = ['Locale: US','Locale: SK'];
+        createComponents.getLocales().each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(localesValues[index]).toBe(text);
+            });
+        });
+
+        //United States Localization
+        var localesValues = ['Locale: US','Locale: SK'];
+
+
+        //United States Pluralization
+
+        //Slovakia Localization
+
+        //United States Pluralization
 
     });
 });

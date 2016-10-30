@@ -2,6 +2,7 @@
 var downloadAngularJSOnePage = require('./downloadAngularJSOnePage.js');
 var theBasics = require('./theBasics.js');
 var addSomeControl = require('./addSomeControl.js');
+var createComponents = require('./createComponents.js');
 
 var HomePage = function(){
     //Download AngularJS 1
@@ -26,6 +27,11 @@ var HomePage = function(){
     //The Add Some Control page object
     this.getAddSomeControl = function(){
         return addSomeControl;
+    }
+
+    //Test Create Components
+    this.getCreateComponents = function(){
+        return createComponents;
     }
 };
 
