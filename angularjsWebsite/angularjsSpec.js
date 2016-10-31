@@ -7,6 +7,7 @@ describe('Test AngularJS Website',function(){
     var downloadAngularJSOnePage = require('./pageObjects/downloadAngularJSOnePage.js');
     var theBasics = require('./pageObjects/theBasics.js');
     var addSomeControl = require('./pageObjects/addSomeControl.js');
+    var wireUpABackend = require('./pageObjects/wireUpABackend.js');
     var createComponents = require('./pageObjects/createComponents.js');
 
     it('Test basic components on the AngularJS home page',function(){
@@ -140,17 +141,40 @@ describe('Test AngularJS Website',function(){
     });
 
     it('Test Wire Up A Backend',function(){
-        /*element.all(by.repeater('project in projectList.projects').column('project.name')).each(function (element, index) {
-            console.log('inside element.all');
+        //need to wait for element.all to become available
+        browser.wait(presenceOfAll(wireUpABackend.getJavaScriptProjects()), 10000);
+
+        var javaScriptProjectValues = ['Angular 2','AngularJS','Backbone','Cappucino','Ember','GWT','jQuery','Knockout','Polymer','React','Spine','SproutCore'];
+        wireUpABackend.getJavaScriptProjects().each(function (element, index) {
             element.getText().then(function (text) {
-                console.log(text);
+                expect(javaScriptProjectValues[index]).toBe(text);
             });
-        });*/
-        //element.all(by.repeater('todo in todoList.todos')).each(function (element, index) {
-        //browser.wait(element.all(by.repeater('project in projectList.projects'))).isPresent;
+        });
 
+        var javaScriptProjectDescriptionsValues = ['One framework. Mobile and desktop.',
+                                                 'HTML enhanced for web apps!',
+                                                 'Models for your apps.',
+                                                 'Objective-J.',
+                                                 'Ambitious web apps.',
+                                                 'JS in Java.',
+                                                 'Write less, do more.',
+                                                 'MVVM pattern.',
+                                                 'Reusable components for the modern web.',
+                                                 'A JavaScript library for building user interfaces.',
+                                                 'Awesome MVC Apps.',
+                                                 'A Framework for Innovative web-apps.'];
+        wireUpABackend.javaScriptProjectDescriptions().each(function (element, index) {
+            element.getText().then(function (text) {
+                expect(javaScriptProjectDescriptionsValues[index]).toBe(text);
+            });
+        });
 
-
+        var updateJavaScriptProjectsValues = ['GWT',
+                                             'http://www.gwtproject.org/',
+                                             'JS in Java.',
+                                             'GWT_Updated',
+                                             'http://www.gwtproject_updated.org/',
+                                             'JS in Java._Updated'];
 
     });
 
@@ -195,6 +219,15 @@ describe('Test AngularJS Website',function(){
             });
         });
     });
+
+    //http://stackoverflow.com/questions/34289029/protractor-wait-doesnt-work-with-element-all
+    function presenceOfAll(elementArrayFinder) {
+        return function () {
+            return elementArrayFinder.count(function (count) {
+                return count > 0;
+            });
+        };
+    }
 });
 
 
