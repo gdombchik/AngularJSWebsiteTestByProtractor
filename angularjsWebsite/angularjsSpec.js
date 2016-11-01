@@ -163,19 +163,46 @@ describe('Test AngularJS Website',function(){
                                                  'A JavaScript library for building user interfaces.',
                                                  'Awesome MVC Apps.',
                                                  'A Framework for Innovative web-apps.'];
-        wireUpABackend.javaScriptProjectDescriptions().each(function (element, index) {
+        wireUpABackend.getJavaScriptProjectDescriptions().each(function (element, index) {
             element.getText().then(function (text) {
                 expect(javaScriptProjectDescriptionsValues[index]).toBe(text);
             });
         });
 
         var updateJavaScriptProjectsValues = ['GWT',
-                                             'http://www.gwtproject.org/',
-                                             'JS in Java.',
                                              'GWT_Updated',
                                              'http://www.gwtproject_updated.org/',
                                              'JS in Java._Updated'];
 
+        //Enter GWT in the Search Input Box
+        wireUpABackend.searchInput.sendKeys(updateJavaScriptProjectsValues[0]);  //GWT
+
+        //browser.pause();
+        browser.sleep(10000); //todo:  It takes a while to filter the search input.  Will clean this up.
+
+        wireUpABackend.getJavaScriptProjectEditLinks().each(function (element, index) { element.click(); });
+
+        //Clear and Update the Project Name, Website, and Description Input Boxes
+        wireUpABackend.editJavaScriptProjectName.clear();
+        wireUpABackend.editJavaScriptProjectWebsite.clear();
+        wireUpABackend.editJavaScriptProjectDescription.clear();
+
+        wireUpABackend.editJavaScriptProjectName.sendKeys(updateJavaScriptProjectsValues[1]);  //GWT_Updated
+        wireUpABackend.editJavaScriptProjectWebsite.sendKeys(updateJavaScriptProjectsValues[2]);  //http://www.gwtproject_updated.org/
+        wireUpABackend.editJavaScriptProjectDescription.sendKeys(updateJavaScriptProjectsValues[3]);  //JS in Java._Updated
+
+        //Click the Save Button
+        wireUpABackend.saveButton.click();
+
+        browser.sleep(10000);
+
+        //Search for Updated GWT Project Name
+        wireUpABackend.searchInput.sendKeys(updateJavaScriptProjectsValues[1]);  //GWT_Updated
+
+        //Confirm JavaScript Project labels has been updated
+        expect(wireUpABackend.getJavaScriptProjects().get(0).getText()).toBe(updateJavaScriptProjectsValues[1]);  //GWT_Updated
+        expect(wireUpABackend.getJavaScriptProjects().get(0).getAttribute('href')).toBe(updateJavaScriptProjectsValues[2]);  //http://www.gwtproject_updated.org/
+        expect(wireUpABackend.getJavaScriptProjectDescriptions().get(0).getText()).toBe(updateJavaScriptProjectsValues[3]);  //JS in Java._Updated
     });
 
     it('Test Create Components',function(){
