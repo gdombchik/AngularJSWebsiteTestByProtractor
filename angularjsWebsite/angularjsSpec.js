@@ -178,7 +178,7 @@ describe('Test AngularJS Website',function(){
         wireUpABackend.searchInput.sendKeys(updateJavaScriptProjectsValues[0]);  //GWT
 
         //browser.pause();
-        browser.sleep(10000); //todo:  It takes a while to filter the search input.  Will clean this up.
+        //browser.sleep(10000); //todo:  It takes a while to filter the search input.  Will clean this up.
 
         wireUpABackend.getJavaScriptProjectEditLinks().each(function (element, index) { element.click(); });
 
@@ -194,12 +194,13 @@ describe('Test AngularJS Website',function(){
         //Click the Save Button
         wireUpABackend.saveButton.click();
 
-        browser.sleep(10000);
+        //browser.sleep(10000);
 
         //Search for Updated GWT Project Name
         wireUpABackend.searchInput.sendKeys(updateJavaScriptProjectsValues[1]);  //GWT_Updated
 
         //Confirm JavaScript Project labels has been updated
+        browser.wait(wireUpABackend.getJavaScriptProjects().get(0).getText()).isPresent;
         expect(wireUpABackend.getJavaScriptProjects().get(0).getText()).toBe(updateJavaScriptProjectsValues[1]);  //GWT_Updated
         expect(wireUpABackend.getJavaScriptProjects().get(0).getAttribute('href')).toBe(updateJavaScriptProjectsValues[2]);  //http://www.gwtproject_updated.org/
         expect(wireUpABackend.getJavaScriptProjectDescriptions().get(0).getText()).toBe(updateJavaScriptProjectsValues[3]);  //JS in Java._Updated
