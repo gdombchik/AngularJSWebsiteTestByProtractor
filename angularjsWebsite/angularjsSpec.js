@@ -21,7 +21,6 @@ describe('Test AngularJS Website',function(){
         downloadAngularJSOnePage = homePage.clickDownloadAngularJSOnePage();
 
         //check the properties of the DownloadAngularJSOnePage
-        browser.wait(downloadAngularJSOnePage.titleLabel.getText()).isPresent;
         expect(downloadAngularJSOnePage.titleLabel.getText()).toBe('Download AngularJS');
         expect(downloadAngularJSOnePage.branch.getText()).toBe('1.5.x (stable)');
         expect(downloadAngularJSOnePage.buildMinified.getText()).toBe('Minified');
@@ -33,6 +32,8 @@ describe('Test AngularJS Website',function(){
         expect(downloadAngularJSOnePage.buildMinified.getAttribute('class')).toContain('active'); //selected
         expect(downloadAngularJSOnePage.buildUncompressed.getAttribute('class')).not.toContain('active'); //not selected
         expect(downloadAngularJSOnePage.buildZip.getAttribute('class')).not.toContain('active'); //not selected
+
+        //browser.sleep(10000);
 
         expect(downloadAngularJSOnePage.getBower()).toContain('bower');
         expect(downloadAngularJSOnePage.getNpm()).toContain('npm');
@@ -200,7 +201,6 @@ describe('Test AngularJS Website',function(){
         wireUpABackend.searchInput.sendKeys(updateJavaScriptProjectsValues[1]);  //GWT_Updated
 
         //Confirm JavaScript Project labels has been updated
-        browser.wait(wireUpABackend.getJavaScriptProjects().get(0).getText()).isPresent;
         expect(wireUpABackend.getJavaScriptProjects().get(0).getText()).toBe(updateJavaScriptProjectsValues[1]);  //GWT_Updated
         expect(wireUpABackend.getJavaScriptProjects().get(0).getAttribute('href')).toBe(updateJavaScriptProjectsValues[2]);  //http://www.gwtproject_updated.org/
         expect(wireUpABackend.getJavaScriptProjectDescriptions().get(0).getText()).toBe(updateJavaScriptProjectsValues[3]);  //JS in Java._Updated
