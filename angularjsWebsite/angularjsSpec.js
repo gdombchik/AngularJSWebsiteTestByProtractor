@@ -13,16 +13,16 @@ describe('Test AngularJS Website',function(){
     it('Test basic components on the AngularJS home page',function(){
         //different jasmine matchers(toMatch,toBe,toEqual,toContain)
         expect(homePage.downLoadAngularJSOneButton.getText()).toMatch('AngularJS 1');
-        expect(homePage.downLoadAngularJSOneButton.getText()).toBe('Download AngularJS 1\n\n(1.6.0-rc.2 / 1.5.9 / 1.2.32)');
-        expect(homePage.downLoadAngularJSOneButton.getText()).toEqual('Download AngularJS 1\n\n(1.6.0-rc.2 / 1.5.9 / 1.2.32)');
-        expect(homePage.downLoadAngularJSOneButton.getText()).toContain('Download AngularJS 1\n\n(1.6.0-rc.2 / 1.5.9 / 1.2.32)');
+        expect(homePage.downLoadAngularJSOneButton.getText()).toBe('Download AngularJS 1\n\n(1.6.0 / 1.2.32)');
+        expect(homePage.downLoadAngularJSOneButton.getText()).toEqual('Download AngularJS 1\n\n(1.6.0 / 1.2.32)');
+        expect(homePage.downLoadAngularJSOneButton.getText()).toContain('Download AngularJS 1\n\n(1.6.0 / 1.2.32)');
 
         //click the downLoadAngularJSOneButton and return the DownloadAngularJSOnePage page object
         downloadAngularJSOnePage = homePage.clickDownloadAngularJSOnePage();
 
         //check the properties of the DownloadAngularJSOnePage
         expect(downloadAngularJSOnePage.titleLabel.getText()).toBe('Download AngularJS');
-        expect(downloadAngularJSOnePage.branch.getText()).toBe('1.5.x (stable)');
+        expect(downloadAngularJSOnePage.branch.getText()).toBe('1.6.x (latest)');
         expect(downloadAngularJSOnePage.buildMinified.getText()).toBe('Minified');
         expect(downloadAngularJSOnePage.buildUncompressed.getText()).toBe('Uncompressed');
         expect(downloadAngularJSOnePage.buildZip.getText()).toBe('Zip');

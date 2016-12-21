@@ -2,7 +2,7 @@
 var DownloadAngularJSOnePage = function(){
     this.titleLabel = element(by.id('downloadLabel'));
     //branch
-    this.branch = element(by.buttonText('1.5.x (stable)'));
+    this.branch = element(by.buttonText('1.6.x (latest)'));
     //build
     this.buildMinified = element(by.buttonText('Minified'));
     this.buildZip = element(by.partialButtonText('Zip'));                   //button text has extra spaces
